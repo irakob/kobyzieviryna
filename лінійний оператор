@@ -1,0 +1,128 @@
+using System;
+namespace Лінійний_оператор
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Завдання 1:
+            Console.WriteLine("завдання 1");
+            Console.WriteLine("впишіть перше число: ");
+            int number1 = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("впишіть друге число: ");
+            int number2 = Convert.ToInt32(Console.ReadLine());
+            if (number1 >= 1 && number1 <= 31 && number2 >= 1 && number2 <= 12)
+            {
+                Console.WriteLine("це може бути місяцем чи днем");
+            }
+            else
+            {
+                Console.WriteLine("це не може бути місяцем чи днем");
+            }
+
+            //Завдання 2:
+            Console.WriteLine("завдання 2");
+            Console.WriteLine("впишіть число: ");
+            double number = Convert.ToDouble(Console.ReadLine());
+            int firstnum = (int)(number * 10) % 10;
+            int secondnum = (int)(number * 100) % 10;
+            Console.WriteLine($"{firstnum} + {secondnum} = {firstnum + secondnum}");
+
+            //Завдання 3:
+            Console.WriteLine("завдання 3");
+            Console.WriteLine("Enter the hour of the day: ");
+            int h = int.Parse(Console.ReadLine());
+            if (h >= 6 && h <= 11)
+            {
+                Console.WriteLine("Добрий ранок");
+            }
+            else if (h >= 12 && h <= 17)
+            {
+                Console.WriteLine("Добрий день");
+            }
+            else if (h >= 18 && h <= 23)
+            {
+                Console.WriteLine("Добрий вечір");
+            }
+            else
+            {
+                Console.WriteLine("Доброї ночі");
+            }
+
+            //Завдання 4:
+            Console.WriteLine("завдання 4");
+            Console.WriteLine("впишіть перше число: ");
+            int num1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("впишіть друге число: ");
+            int num2 = int.Parse(Console.ReadLine());
+            Console.WriteLine("впишіть третє число: ");
+            int num3 = int.Parse(Console.ReadLine());
+            int max = num1;
+            int min = num2;
+            if (num1 > num2 && num1 > num3)
+            {
+                max = num1;
+            }
+            else if (num2 > num1 && num2 > num3)
+            {
+                max = num2;
+            }
+            else if (num3 > num1 && num3 > num2)
+            {
+                max = num3;
+            }
+            if (num1 < num2 && num1 < num3)
+            {
+                min = num1;
+            }
+            else if (num2 < num1 && num2 < num3)
+            {
+                min = num2;
+            }
+            else if (num3 < num1 && num3 < num2)
+            {
+                min = num3;
+            }
+            Console.WriteLine($"максимальне число: {max}, мінімальне число: {min}");
+
+            //Завдання 5:
+            Console.WriteLine("завдання 5");
+            Console.WriteLine("довжина прямокутника: ");
+            double a = double.Parse(Console.ReadLine());
+            Console.WriteLine("ширина прямокутника: ");
+            double b = double.Parse(Console.ReadLine());
+            double s = a * b;
+            Console.WriteLine($"Площа прямокутника: {s}");
+
+            //Завдання 6:
+            Console.WriteLine("завдання 6");
+            Console.WriteLine("впишіть своє число:");
+            int num = int.Parse(Console.ReadLine());
+            if (num % 2 == 0)
+            {
+                Console.WriteLine($"{num} парне число");
+            }
+            else
+            {
+                Console.WriteLine($"{num} непарне число");
+            }
+
+            //Завдання 7:
+            Console.WriteLine("завдання 7");
+            Console.WriteLine("Температура у Цельсіях: ");
+            double cl = double.Parse(Console.ReadLine());
+            double fr = cl * 9 / 5 + 32;
+            Console.WriteLine($"Температура у Фарангейтах: {fr}");
+            //Завдання 8:
+            Console.WriteLine("завдання 8");
+            Console.WriteLine("впишіть n: ");
+            int n = int.Parse(Console.ReadLine());
+            int sum = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                sum += i;
+            }
+            Console.WriteLine($"Сума перших {n} натуральних чисел: {sum}");
+        }
+    }
+}
