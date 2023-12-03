@@ -1,0 +1,100 @@
+using System;
+
+namespace Масиви
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // одновимірні масиви
+            // Завдання 1:
+            int[] array = { 7, 9, 5, 6, 2 };
+            int sum = 0;
+            foreach (int number in array)
+            {
+                sum += number;
+            }
+            double average = (double)sum / array.Length;
+            Console.WriteLine($"average: {average}");
+
+            // Завдання 2:
+            char[] arr = { 'm', 'i', 's', 't', 'e', 'r' };
+            int n = 0;
+            for (int i = 0; i < arr.Length / 2; i++)
+            {
+                if (arr[i] != arr[arr.Length - i - 1])
+                {
+                    n = 1;
+                    break;
+                }
+            }
+            if (n == 1)
+                Console.WriteLine("це не є palindrome");
+            else
+                Console.WriteLine("це є palindrome");
+
+            // Завдання 3:
+            int[] nums = { 6, 2, 7, 9, 4, 5, 8, 1, 3, 12 };
+            Console.WriteLine($"Парні числа: ");
+            foreach (int num in nums)
+            {
+                if (num % 2 == 0)
+                {
+                    Console.WriteLine(num);
+                }
+            }
+
+            // Завдання 4:
+            int[] numbers = { 4, 9, -8, 5, 7, 21, -3 };
+            int positiveSum = PositiveSum(numbers);
+            Console.WriteLine($"сума додатних чисел: {positiveSum}");
+
+            // Завдання 5:
+            int[] Array = { 7, 4, 2, 8, 1, 9, 3 };
+            int element = 3;
+            int index = 0;
+            for (int i = 0; i < Array.Length; i++)
+            {
+                if (Array[i] == element)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            Console.WriteLine($"найменший індекс числа {element}: {index}");
+
+            // Завдання 6:
+            int[] myArray = { 5, -1, 7, -9, 23, -6 };
+            int negativeProduct = NegativeProduct(myArray);
+            Console.WriteLine($"добуток від'ємних чисел: {negativeProduct}");
+        }
+
+        // метод для знаходження суми додатних чисел
+        static int PositiveSum(int[] arr)
+        {
+            int sum = 0;
+            foreach (int num in arr)
+            {
+                if (num > 0)
+                {
+                    sum += num;
+                }
+            }
+            return sum;
+        }
+
+        // метод для знаходження добутку від'ємних чисел
+        static int NegativeProduct(int[] arr)
+        {
+            int product = 1;
+            foreach (int num in arr)
+            {
+                if (num < 0)
+                {
+                    product *= num;
+                }
+            }
+            return product;
+        }
+    }
+}
