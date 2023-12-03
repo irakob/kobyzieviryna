@@ -1,0 +1,111 @@
+using System;
+
+class Person
+{
+    private string name;
+    private DateTime birthYear;
+
+    public string Name
+    {
+        get { return name; }
+    }
+
+    public DateTime BirthYear
+    {
+        get { return birthYear; }
+    }
+
+    public Person()
+    {
+        name = "Ira";
+        birthYear = DateTime.MinValue;
+    }
+
+    public Person(string name, DateTime birthYear)
+    {
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
+    public int Age()
+    {
+        return DateTime.Now.Year - birthYear.Year;
+    }
+
+    public void Input()
+    {
+        Console.Write("Напишіть ім'я: ");
+        name = Console.ReadLine();
+        Console.Write("напишіть рік народження: ");
+        birthYear = DateTime.Parse(Console.ReadLine());
+    }
+
+    public void ChangeName(string newName)
+    {
+        name = newName;
+    }
+
+    public override string ToString()
+    {
+        return $"Ім'я: {name}, Вік: {birthYear.Year}";
+    }
+
+    public void Output()
+    {
+        Console.WriteLine(ToString());
+    }
+
+    public static bool operator ==(Person person1, Person person2)
+    {
+        return person1.name == person2.name;
+    }
+
+    public static bool operator !=(Person person1, Person person2)
+    {
+        return person1.name != person2.name;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Person[] people = new Person[6];
+
+        for (int i = 0; i < 6; i++)
+        {
+            people[i] = new Person();
+            people[i].Input();
+        }
+
+        foreach (Person person in people)
+        {
+            Console.WriteLine($"Ім'я: {person.Name}, Вік: {person.Age()}");
+
+            if (person.Age() < 16)
+            {
+                person.ChangeName("Дуже молодий");
+            }
+        }
+
+        Console.WriteLine("\nІнформація про всіх людей:");
+
+        foreach (Person person in people)
+        {
+            person.Output();
+        }
+
+        Console.WriteLine("\nЛюди зі схожим ім'я:");
+
+        for (int i = 0; i < people.Length - 1; i++)
+        {
+            for (int j = i + 1; j < people.Length; j++)
+            {
+                if (people[i] == people[j])
+                {
+                    Console.WriteLine($"{people[i].Name} мають таке ж ім'я {people[j].Name}");
+                }
+            }
+        }
+    }
+}
