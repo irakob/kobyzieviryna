@@ -1,0 +1,90 @@
+using System;
+
+namespace клас_Car
+{
+    class Car
+    {
+        public string Name;
+        public string Color;
+        public double Price;
+        public const string CompanyName = "CarCom";
+        public Car()
+        {
+        }
+        public Car(string name, string color, double price)
+        {
+            Name = name;
+            Color = color;
+            Price = price;
+        }
+        public void Input()
+        {
+            Console.WriteLine("впишіть назву авто: ");
+            Name = Console.ReadLine();
+            Console.WriteLine("впишіть колір авто: ");
+            Color = Console.ReadLine();
+            Console.WriteLine("впишіть ціну авто: ");
+            double.TryParse(Console.ReadLine(), out double price);
+            Price = price;
+        }
+        public void Print()
+        {
+            Console.WriteLine($"Назва: {Name}");
+            Console.WriteLine($"Колір: {Color}");
+            Console.WriteLine($"Ціна: {Price}");
+            Console.WriteLine($"Компанія: {CompanyName}");
+        }
+        public void ChangePrice(double x)
+        {
+            Price -= Price * (x / 100);
+        }
+        public void ChangeColor(string newColor)
+        {
+            if (Color.ToLower() == "white")
+            {
+                Color = newColor;
+            }
+            else
+            {
+                Console.WriteLine("Цей автомобіль не можливо пофарбувати, бо він не білий");
+            }
+        }
+        public string PrintInfo()
+        {
+            return $"Назва: {Name}, Колір: {Color}, Ціна: {Price}, Компанія: {CompanyName}";
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            Car car1 = new Car();
+            Car car2 = new Car();
+            Car car3 = new Car();
+
+            car1.Input();
+            car2.Input();
+            car3.Input();
+
+            car1.ChangePrice(10);
+            car2.ChangePrice(10);
+            car3.ChangePrice(10);
+
+            Console.WriteLine("Дані авто: ");
+            car1.Print();
+            car2.Print();
+            car3.Print();
+
+            Console.WriteLine("впишіть новий колір для білих авто: ");
+            string newColor = Console.ReadLine();
+
+            car1.ChangeColor(newColor);
+            car2.ChangeColor(newColor);
+            car3.ChangeColor(newColor);
+
+            Console.WriteLine(car1.PrintInfo());
+            Console.WriteLine(car2.PrintInfo());
+            Console.WriteLine(car3.PrintInfo());
+        }
+    }
+}
