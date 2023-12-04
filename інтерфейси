@@ -1,0 +1,264 @@
+// 1.1. Завдання: Керування автопарком
+
+using System;
+
+public interface IVehicle
+{
+    void Start();
+    void Stop();
+    void Drive();
+}
+
+public class Car : IVehicle
+{
+    public string Model { get; set; }
+
+    public Car(string model)
+    {
+        Model = model;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"{Model} почав рух.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"{Model} зупинився.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"{Model} їде.");
+    }
+}
+
+public class Motorcycle : IVehicle
+{
+    public string Brand { get; set; }
+
+    public Motorcycle(string brand)
+    {
+        Brand = brand;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"{Brand} мотоцикл поїхав.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"{Brand} мотоцикл зупинився.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"{Brand} мотоцикл їде.");
+    }
+}
+
+public class Truck : IVehicle
+{
+    public string Company { get; set; }
+
+    public Truck(string company)
+    {
+        Company = company;
+    }
+
+    public void Start()
+    {
+        Console.WriteLine($"{Company} вантажівка поїхала.");
+    }
+
+    public void Stop()
+    {
+        Console.WriteLine($"{Company} вантажівка зупинилась.");
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine($"{Company} вантажівка їде.");
+    }
+}
+
+
+// 2.1. Завдання: Керування бібліотекою книг
+public interface IPrintable
+{
+    void Print();
+}
+
+public interface IBorrowable
+{
+    void BorrowItem();
+    void ReturnItem();
+    bool IsAvailable();
+}
+
+public class Book : IPrintable, IBorrowable
+{
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public int Year { get; set; }
+    private bool isBorrowed;
+
+    public Book(string title, string author, int year)
+    {
+        Title = title;
+        Author = author;
+        Year = year;
+        isBorrowed = false;
+    }
+
+    public void Print()
+    {
+        Console.WriteLine($"назва: {Title}, автор: {Author}, рік: {Year}");
+    }
+
+    public void BorrowItem()
+    {
+        Console.WriteLine(isBorrowed ? $"{Title} щойно загублена." : $"{Title} загубилась.");
+        isBorrowed = !isBorrowed;
+    }
+
+    public void ReturnItem()
+    {
+        if (isBorrowed)
+        {
+            isBorrowed = false;
+            Console.WriteLine($"{Title} повернена до бібліотеки.");
+        }
+        else
+        {
+            Console.WriteLine($"{Title} не загублена.");
+        }
+    }
+
+    public bool IsAvailable()
+    {
+        return !isBorrowed;
+    }
+}
+
+
+// 3 
+public interface IProduct
+{
+    void DisplayInfo();
+}
+
+public interface IShoppable
+{
+    void AddToCart();
+}
+
+
+public class ElectronicDevice : IProduct
+{
+    public string DeviceName { get; set; }
+    public string Manufacturer { get; set; }
+    public double Price { get; set; }
+
+    public ElectronicDevice(string deviceName, string manufacturer, double price)
+    {
+        DeviceName = deviceName;
+        Manufacturer = manufacturer;
+        Price = price;
+    }
+
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"пристрій: {DeviceName}, виробник: {Manufacturer}, ціна: ${Price}");
+    }
+}
+
+// Клас смартфона (успадковує ElectronicDevice та реалізує IShoppable)
+public class Smartphone : ElectronicDevice, IShoppable
+{
+    public string OperatingSystem { get; set; }
+
+    public Smartphone(string deviceName, string manufacturer, double price, string operatingSystem)
+        : base(deviceName, manufacturer, price)
+    {
+        OperatingSystem = operatingSystem;
+    }
+
+    public void AddToCart()
+    {
+        Console.WriteLine($"{DeviceName} додати до картки.");
+    }
+}
+
+
+public class Laptop : ElectronicDevice, IShoppable
+{
+    public string Processor { get; set; }
+
+    public Laptop(string deviceName, string manufacturer, double price, string processor)
+        : base(deviceName, manufacturer, price)
+    {
+        Processor = processor;
+    }
+    public void AddToCart()
+    {
+        Console.WriteLine($"{DeviceName} додати до картки.");
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        // 1
+        Car car = new Car("BMW");
+        car.Start();
+        car.Drive();
+        car.Stop();
+
+        Console.WriteLine();
+
+        Motorcycle motorcycle = new Motorcycle("Harley Davidson");
+        motorcycle.Start();
+        motorcycle.Drive();
+        motorcycle.Stop();
+
+        Console.WriteLine();
+
+        Truck truck = new Truck("Mersedes");
+        truck.Start();
+        truck.Drive();
+        truck.Stop();
+
+
+        // 2
+        Book book1 = new Book("Іспанський любовний обман", "Емілі Генрі", 2022);
+        Book book2 = new Book("Клуб убивств по четвергам", "Річард Осман", 2020);
+
+        book1.Print();
+        book2.Print();
+
+        book1.BorrowItem();
+        book2.BorrowItem();
+
+        Console.WriteLine($"Є {book1.Title} в наявності? {book1.IsAvailable()}");
+        Console.WriteLine($"Є {book2.Title} в наявності? {book2.IsAvailable()}");
+
+        book1.ReturnItem();
+        Console.WriteLine($"Є {book1.Title} в наявності? {book1.IsAvailable()}");
+
+
+        // 3
+        Smartphone smartphone = new Smartphone("iPhone 13", "Apple", 999.99, "iOS");
+        Laptop laptop = new Laptop("Asus vivibook", "Asus", 1299.99, "Intel Core i5");
+
+        smartphone.DisplayInfo();
+        laptop.DisplayInfo();
+
+        smartphone.AddToCart();
+        laptop.AddToCart();
+
+    }
+
+}
